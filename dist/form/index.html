@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Form 组件</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/assets/css/0.styles.d6ad21ed.css" as="style"><link rel="preload" href="/assets/js/app.d06a7b82.js" as="script"><link rel="preload" href="/assets/js/2.eeb24f79.js" as="script"><link rel="preload" href="/assets/js/8.4f97ed54.js" as="script"><link rel="prefetch" href="/assets/js/3.ec266864.js"><link rel="prefetch" href="/assets/js/4.f876ad59.js"><link rel="prefetch" href="/assets/js/5.18c5236f.js"><link rel="prefetch" href="/assets/js/6.e86df8f9.js"><link rel="prefetch" href="/assets/js/7.2ea26495.js"><link rel="prefetch" href="/assets/js/9.d34f06ef.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d6ad21ed.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="form-组件"><a href="#form-组件" class="header-anchor">#</a> Form 组件</h1> <h2 id="api"><a href="#api" class="header-anchor">#</a> API</h2> <h3 id="config"><a href="#config" class="header-anchor">#</a> config</h3> <p><em><strong>注意：</strong></em><br>
+在template中使用的时候应用变量进行赋值，不可直接把值写在template模板中，<br>
+如果直接写在模板中，每一次模板更新的时候，该值都是一个全新的值，不断触发更新机制，导致组件内部逻辑形成死锁。</p> <p><font face="courier New" color="gree" size="5">正确</font></p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>lx-form</span> <span class="token attr-name">:config</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>config<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>lx-form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">config</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'名称'</span><span class="token punctuation">,</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token literal-property property">filed</span><span class="token operator">:</span> <span class="token string">'name'</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p><font face="courier New" color="red" size="5">错误</font></p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>lx-form</span> <span class="token attr-name">:config</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>[{ label: '名称', type: 'input', filed: 'name' }]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>lx-form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>该组件接收一个JSON类型的数组数据</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> 
+        <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'姓名'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">filed</span><span class="token operator">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">span</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">style</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token string">'100%'</span><span class="token punctuation">,</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>  
+        <span class="token literal-property property">classList</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token string">'main-input'</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">''</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">attrs</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请输入姓名'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">on</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token function-variable function">input</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'val'</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token function-variable function">blur</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h3 id="config-遵循使用常用的字段名称习惯"><a href="#config-遵循使用常用的字段名称习惯" class="header-anchor">#</a> config 遵循使用常用的字段名称习惯</h3> <p>具体config属性</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'xxx'</span><span class="token punctuation">,</span> <span class="token comment">// form-item 的 label</span>
+    <span class="token literal-property property">filed</span><span class="token operator">:</span> <span class="token string">'xxxx'</span><span class="token punctuation">,</span> <span class="token comment">// 必填项 表单数据对象的字段名</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token comment">// 必填项 表单输入控件的类型，如：文本框：input、下拉选择框：select</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token string">'xxx'</span><span class="token punctuation">,</span> <span class="token comment">//  表单输入控件的 props</span>
+    <span class="token literal-property property">span</span><span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token comment">// 栅格化的 row &gt; col 的 span 配置</span>
+    <span class="token literal-property property">style</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// 样式</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token string">'200px'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">marginLeft</span><span class="token operator">:</span> <span class="token string">'40px'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">classList</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'default'</span><span class="token punctuation">,</span> <span class="token string">'text-center'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 样式类名 </span>
+    <span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 当 type 为 select之类的需要配置数据的类型时的数据</span>
+        <span class="token punctuation">{</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'已选'</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'未选'</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">attrs</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// dom的原生属性</span>
+        <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请输入姓名'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">on</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// 表单暴露的API方法</span>
+        <span class="token function-variable function">change</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">tips</span><span class="token operator">:</span> String <span class="token operator">|</span> Object <span class="token comment">// Object: { text:'我是注释', style: {} }</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="props属性"><a href="#props属性" class="header-anchor">#</a> Props属性</h3> <h4 id="props-在-createelement-函数的标准上添加了一些新的属性-基本使用可以到vue官网中查看-createelement函数的传参方式。"><a href="#props-在-createelement-函数的标准上添加了一些新的属性-基本使用可以到vue官网中查看-createelement函数的传参方式。" class="header-anchor">#</a> props 在 createElement 函数的标准上添加了一些新的属性，基本使用可以到VUE官网中查看 createElement函数的传参方式。</h4> <p>Vue2 createElement <br><a href="https://v2.cn.vuejs.org/v2/guide/render-function.html#%E6%B7%B1%E5%85%A5%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1" target="_blank" rel="noopener noreferrer">https://v2.cn.vuejs.org/v2/guide/render-function.html#深入数据对象<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>####新的属性
+新的属性根据 type属性的值不同，也会不同，也就是不同的type会使用不同的props的属性。</p> <p><strong>type: 'digit-select'</strong><br>
+数值选择器
+<code>实例</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'奖励发放日期'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'digit-select'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">filed</span><span class="token operator">:</span> <span class="token string">'dates'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">range</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 数值范围， 从1开始进行递增，一直到31</span>
+        <span class="token literal-property property">step</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token comment">// 递增数值，默认为1</span>
+        <span class="token literal-property property">precision</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token comment">// 数值精度</span>
+        <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token string">'500px'</span> <span class="token comment">// 组件宽度</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>type: 'uploadImg'</strong><br>
+图片，列表、上传。<code>实例</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'各类证件'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'uploadImg'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">filed</span><span class="token operator">:</span> <span class="token string">'papers'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// Array（多张图片） | String（单张图片）</span>
+      <span class="token literal-property property">isMulti</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 是否多选</span>
+      <span class="token literal-property property">delConfirm</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// 点击右上角删除按钮时是否显示确认</span>
+      <span class="token literal-property property">limit</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token comment">// 可上传图片数量上限</span>
+      <span class="token literal-property property">limitMessage</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token comment">// 超过上限消息</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token string">'155px'</span><span class="token punctuation">,</span> <span class="token comment">// 图片框宽度</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token string">'255px'</span><span class="token punctuation">,</span> <span class="token comment">// 图片框高度</span>
+      <span class="token literal-property property">limitWidth</span><span class="token operator">:</span> <span class="token number">48</span><span class="token punctuation">,</span> <span class="token comment">// 上传图片指定宽度</span>
+      <span class="token literal-property property">limitHeight</span><span class="token operator">:</span> <span class="token number">48</span><span class="token punctuation">,</span> <span class="token comment">// 上传图片指定高度</span>
+      <span class="token literal-property property">limitHeightRange</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">48</span><span class="token punctuation">,</span> <span class="token number">96</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 上传图片宽度指定范围</span>
+      <span class="token literal-property property">limitWidthRange</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">48</span><span class="token punctuation">,</span> <span class="token number">96</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 上传图片高度指定范围</span>
+      <span class="token literal-property property">restrictMessage</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token comment">// 不符合限制条件的消息</span>
+      <span class="token literal-property property">tips</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// 组件注释</span>
+        <span class="token literal-property property">text</span><span class="token operator">:</span> <span class="token string">'测试拖拽'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">accept</span><span class="token operator">:</span> <span class="token string">'jpg,png'</span><span class="token punctuation">,</span> <span class="token comment">// 限制上传类型后缀</span>
+      <span class="token literal-property property">acceptMessage</span><span class="token operator">:</span> <span class="token string">''</span> <span class="token comment">// 不符合限制上传类型的消息</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>type: 'input-number'</strong><br>
+数字输入框<code>实例</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+      <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'薪资'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'input-number'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">filed</span><span class="token operator">:</span> <span class="token string">'pay'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">controls</span><span class="token operator">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">leftText</span><span class="token operator">:</span> <span class="token string">'每个月'</span><span class="token punctuation">,</span> <span class="token comment">// String | Object，数字输入框左边文字</span>
+      <span class="token literal-property property">rightText</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// String | Object，数组输入框右边文字</span>
+        <span class="token literal-property property">text</span><span class="token operator">:</span> <span class="token string">'元'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">style</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token string">'red'</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">attrs</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请输入年龄'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">tips</span><span class="token operator">:</span> <span class="token string">'每个月发放'</span>
+<span class="token punctuation">}</span>
+</code></pre></div><br> <h3 id="type-类型"><a href="#type-类型" class="header-anchor">#</a> type 类型</h3> <p>text 纯文本<br>
+select 下拉框<br>
+input-number 数字<br>
+cascader 穿梭框<br>
+uploadImage 上传图片<br>
+radio / radioButton 单选 / 单选按钮<br>
+checkbox / checkboxButton 多选 / 多选按钮<br></p> <h3 id="event-on事件监听"><a href="#event-on事件监听" class="header-anchor">#</a> Event， on事件监听</h3> <div class="language- extra-class"><pre class="language-text"><code>{
+    on: {...}
+}
+</code></pre></div><p>也是在原有的on基础上进行处理，本form组件为了业务方便，提供了一些新的event事件，根据type的不同，调用不同的on事件。</p> <p><strong>type: Select</strong></p> <p>提供一个新的Event：select</p> <div class="language- extra-class"><pre class="language-text"><code>    on: {
+        select: (item) =&gt; {
+            // item 选中的 option 数据
+        }
+    }
+</code></pre></div><h1 id="自定义"><a href="#自定义" class="header-anchor">#</a> 自定义</h1> <p>自定义分两种，一是整体render，二是formItemRender<br>
+function 类型，参数 h（createElement），参数2 form（form数据对象）<br>
+render：</p> <div class="language- extra-class"><pre class="language-text"><code>{   
+    // label: '名字',
+    // filed: 'name',
+    render (h, form) {
+        return &lt;div&gt;我占据了这一行&lt;div&gt;
+    },
+    // options: []
+}
+  
+</code></pre></div><p>render 会覆盖整个formItem，所以其他属性可以不填写</p> <p>formItemRender：</p> <div class="language- extra-class"><pre class="language-text"><code>    formItemRender (h, form) {
+        return &lt;input /&gt;
+    }
+</code></pre></div><p>formItemRender 保留了label标题部分，只覆盖该行表单内容</p> <h3 id="查询config里的某个配置"><a href="#查询config里的某个配置" class="header-anchor">#</a> 查询config里的某个配置</h3> <p>查询config的配置，可以用于修改我们想要修改配置的属性值，例如disabled = true，改为 false</p> <p>可以通过 ref 的方式调用组件内部的 searchConfig 函数
+searchConfig({ key: 'filed', value: 'name' })</p> <p>就可以找到 属性名：filed，值：name 的这一项配置，直接修改想要修改的属性即可</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.d06a7b82.js" defer></script><script src="/assets/js/2.eeb24f79.js" defer></script><script src="/assets/js/8.4f97ed54.js" defer></script>
+  </body>
+</html>
